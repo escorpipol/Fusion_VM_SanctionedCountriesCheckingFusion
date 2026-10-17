@@ -1,0 +1,188 @@
+Sub ProcessAndTransferData()
+    Dim srcWB As Workbook, destWB As Workbook, vmWB As Workbook
+    Dim srcWS As Worksheet, destWS As Worksheet, pivotWS As Worksheet
+    Dim lastRow As Long, i As Long
+    Dim dateString As String
+    Dim folderPath As String, saveName As String, vmSaveName As String, fullSavePath As String
+    Dim finalRowDest As Long
+    Dim remarksText As String
+    Dim foundDate As String
+    Dim Words() As String
+    Dim akDate As Variant
+    
+    Dim endRowPivot As Long
+    Dim pivotTab As PivotTable
+
+    ' 1. SETUP DYNAMIC FOLDER PATH
+    folderPath = ThisWorkbook.Path & "\"
+    dateString = Format(Date, "ddmmm") & Year(Date)
+    
+    ' 2. PREPARE WORKSHEETS
+    Set srcWB = ThisWorkbook
+    Set srcWS = srcWB.ActiveSheet
+    
+    srcWS.Copy Before:=srcWS
+    Set srcWS = srcWB.ActiveSheet
+    srcWS.Name = "Sanctioned Invoices_" & dateString
+    
+    On Error Resume Next
+    srcWB.Sheets(2).Name = "Raw"
+    On Error GoTo 0
+
+    ' 3. INITIAL CLEANUP
+    srcWS.Rows(1).Delete
+    srcWS.Cells.UnMerge
+    srcWS.Cells.WrapText = False
+
+    ' 4. MERGE REMARKS & DELETE ROWS
+    lastRow = srcWS.Cells(srcWS.Rows.Count, "A").End(xlUp).Row
+    For i = lastRow To 1 Step -1
+        If srcWS.Cells(i, 1).Value = "" And srcWS.Cells(i, 43).Value <> "" Then
+            srcWS.Cells(i - 1, 43).Value = srcWS.Cells(i - 1, 43).Value & " " & srcWS.Cells(i, 43).Value
+            srcWS.Rows(i).Delete
+        ElseIf LCase(Trim(srcWS.Cells(i, 22).Value)) = "intercompany" Or _
+               LCase(Trim(srcWS.Cells(i, 23).Value)) = "intercompany" Or _
+               LCase(Trim(srcWS.Cells(i, 33).Value)) = "incomplete" Then
+            srcWS.Rows(i).Delete
+        End If
+    Next i
+
+    ' 5. REMOVE DUPLICATES
+    lastRow = srcWS.Cells(srcWS.Rows.Count, "A").End(xlUp).Row
+    srcWS.Range("A1:AQ" & lastRow).RemoveDuplicates Columns:=1, Header:=xlNo
+
+    ' 6. TRANSFER TO EXTERNAL FILE
+    Set destWB = Workbooks.Open(folderPath & "template2.xlsx")
+    
+    On Error Resume Next
+    Set destWS = destWB.Sheets("Export Worksheet")
+    On Error GoTo 0
+    
+    If destWS Is Nothing Then
+        MsgBox "Error: Sheet 'Export Worksheet' not found!", vbCritical
+        destWB.Close SaveChanges:=False
+        Exit Sub
+    End If
+
+    lastRow = destWS.Cells(destWS.Rows.Count, "B").End(xlUp).Row
+    If lastRow >= 3 Then destWS.Rows("3:" & lastRow).Delete
+
+    ' 7. COPY DATA
+    lastRow = srcWS.Cells(srcWS.Rows.Count, "A").End(xlUp).Row
+    srcWS.Range("A2:AG" & lastRow).Copy
+    destWS.Range("B3").PasteSpecial Paste:=xlPasteValues
+    srcWS.Range("AP2:AP" & lastRow).Copy
+    destWS.Range("AI3").PasteSpecial Paste:=xlPasteValues
+    srcWS.Range("AQ2:AQ" & lastRow).Copy
+    destWS.Range("AN3").PasteSpecial Paste:=xlPasteValues
+    
+    ' 8. FORMATTING & FILLING
+    finalRowDest = destWS.Cells(destWS.Rows.Count, "B").End(xlUp).Row
+    
+    If finalRowDest >= 3 Then
+        destWS.Range("A2").AutoFill Destination:=destWS.Range("A2:A" & finalRowDest)
+        destWS.Range("AK2").AutoFill Destination:=destWS.Range("AK2:AK" & finalRowDest)
+        destWS.Range("A2:AP2").Copy
+        destWS.Range("A3:AP" & finalRowDest).PasteSpecial Paste:=xlPasteFormats
+        
+        With destWS.Range("AI3:AI" & finalRowDest)
+            .Replace "Y", "Yes", xlWhole: .Replace "N", "No", xlWhole
+        End With
+
+        ' 9. DELETE ROW 2
+        destWS.Rows(2).Delete
+        finalRowDest = destWS.Cells(destWS.Rows.Count, "B").End(xlUp).Row
+
+        ' --- PROCESSING LOOP ---
+        For i = 2 To finalRowDest
+           If LCase(Trim(destWS.Cells(i, 35).Value)) = "no" Then
+                remarksText = Trim(destWS.Cells(i, 40).Value)
+                If (InStr(1, remarksText, "pay", 1) > 0 Or InStr(1, remarksText, "release", 1) > 0) And InStr(1, remarksText, "not", 1) = 0 Then
+                    Words = Split(remarksText, " ")
+                    foundDate = Words(UBound(Words))
+                    If Right(foundDate, 1) = "." Or Right(foundDate, 1) = "," Then foundDate = Left(foundDate, Len(foundDate) - 1)
+                    If IsDate(foundDate) Then
+                        destWS.Cells(i, 36).Value = CDate(foundDate)
+                        destWS.Cells(i, 36).NumberFormat = "dd-mmm-yy"
+                    End If
+                End If
+
+                akDate = destWS.Cells(i, 37).Value
+                If IsEmpty(akDate) Or akDate = "" Or Not IsDate(akDate) Then
+                    destWS.Cells(i, 40).Value = "Note to VM. Please assist to update release date."
+                ElseIf CDate(akDate) >= Date Then
+                    destWS.Cells(i, 40).Value = "Checked and proceed for release"
+                Else
+                    destWS.Cells(i, 40).Value = "Note to VM. Please assist to update release date."
+                End If
+            End If
+        Next i
+
+        ' --- SORT BY COLUMN AJ ---
+        With destWS.Sort
+            .SortFields.Clear
+            .SortFields.Add Key:=destWS.Range("AJ2:AJ" & finalRowDest), Order:=xlDescending
+            .SetRange destWS.Range("A1:AP" & finalRowDest): .Header = xlYes: .Apply
+        End With
+
+        ' --- UPDATE PIVOT TABLE ---
+        endRowPivot = 1
+        For i = finalRowDest To 2 Step -1
+            If InStr(1, destWS.Cells(i, 40).Value, "Checked and proceed for release", 1) > 0 Then
+                endRowPivot = i: Exit For
+            End If
+        Next i
+
+        Set pivotWS = destWB.Sheets("PIVOT")
+        Set pivotTab = pivotWS.PivotTables(1)
+        If Not pivotTab Is Nothing Then
+            pivotTab.ChangePivotCache destWB.PivotCaches.Create(xlDatabase, "'Export Worksheet'!R1C1:R" & endRowPivot & "C40")
+            pivotTab.RefreshTable
+            Dim pf As PivotField
+            For Each pf In pivotTab.RowFields: pf.Orientation = xlHidden: Next pf
+            For Each pf In pivotTab.DataFields: pf.Orientation = xlHidden: Next pf
+            With pivotTab.PivotFields("Name"): .Orientation = xlRowField: .Position = 1: End With
+            With pivotTab.PivotFields("COUNTRY NAME"): .Orientation = xlRowField: .Position = 2: End With
+            With pivotTab.PivotFields("INVOICE_NUM"): .Orientation = xlDataField: .Function = xlCount: .Name = "Count of Invoices": End With
+        End If
+    End If
+
+    ' 10. SAVE PAYMENTS TEAM FILE
+    destWS.Columns.AutoFit
+    Application.CutCopyMode = False
+    Application.DisplayAlerts = False
+    
+    saveName = "Payments Team for checking -" & UCase(Format(Date, "ddmmmyy")) & ".xlsx"
+    destWB.SaveAs Filename:=folderPath & saveName
+    
+    ' ============================================================
+    ' >>> UPDATED CODE: CREATE VM TEAM FILE USING FILTERS <<<
+    ' ============================================================
+    vmSaveName = "VM Team for checking -" & UCase(Format(Date, "ddmmmyy")) & ".xlsx"
+    destWB.SaveAs Filename:=folderPath & vmSaveName
+    
+    Set vmWB = Workbooks(vmSaveName)
+    Set destWS = vmWB.Sheets("Export Worksheet")
+    
+    ' 1. Apply Filter to Column AN (40) to show everything NOT containing "Note to VM"
+    lastRow = destWS.Cells(destWS.Rows.Count, "B").End(xlUp).Row
+    
+    With destWS.Range("A1:AN" & lastRow)
+        .AutoFilter Field:=40, Criteria1:="<>*Note to VM*"
+        
+        ' 2. Delete the visible rows (skipping the header row)
+        On Error Resume Next ' In case no rows match the filter
+        .Offset(1, 0).SpecialCells(xlCellTypeVisible).EntireRow.Delete
+        On Error GoTo 0
+        
+        ' 3. Clear the filter to show the remaining "Note to VM" rows
+        destWS.AutoFilterMode = False
+    End With
+    
+    vmWB.Save
+    ' ============================================================
+    
+    Application.DisplayAlerts = True
+    MsgBox "Process Complete!" & vbCrLf & "Two files created for Payments and VM Teams.", vbInformation
+End Sub
+

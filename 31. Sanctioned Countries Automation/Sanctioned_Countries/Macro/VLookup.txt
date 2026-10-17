@@ -1,0 +1,70 @@
+Sub Vlookup()
+    Dim wbFile As Workbook
+    Dim wsExport As Worksheet
+    Dim wsCountryCode As Worksheet
+    Dim Lrow As Long
+    Dim wb As Workbook
+
+    ' Find open workbook that starts with "VM Team for checking" but is not ThisWorkbook
+    For Each wb In Application.Workbooks
+        On Error Resume Next
+        Set wsExport = wb.Worksheets("Export Worksheet")
+        Set wsCountryCode = wb.Worksheets("Country Code")
+        On Error GoTo 0
+
+        If Not wsExport Is Nothing And Not wsCountryCode Is Nothing Then
+            Set wbFile = wb
+            Exit For
+        End If
+    Next wb
+
+    ' If no workbook found, show message and exit
+    If wbFile Is Nothing Then
+        MsgBox "No open workbook found starting with 'VM Team for checking'.", vbExclamation
+        Exit Sub
+    End If
+
+    ' Set worksheets
+    On Error Resume Next
+    Set wsExport = wbFile.Worksheets("Export Worksheet")
+    Set wsCountryCode = wbFile.Worksheets("Country Code")
+    On Error GoTo 0
+
+    If wsExport Is Nothing Or wsCountryCode Is Nothing Then
+        MsgBox "Export Worksheet or Country Code sheet not found in workbook.", vbCritical
+        Exit Sub
+    End If
+
+    ' VLOOKUP and data cleaning
+    With wsExport
+        .Activate
+        Lrow = .Range("D" & .Rows.Count).End(xlUp).Row
+        .Range("AG:AG").Insert
+        .Range("AG1") = "Intermediary Country code"
+        If Lrow > 2 Then
+            .Range("AG2").Formula = "=VLOOKUP(AH2,'Country Code'!B:C,2,0)"
+            .Range("AG2").AutoFill Destination:=.Range("AG2:AG" & Lrow), Type:=xlFillDefault
+        Else
+            .Range("AG2").Formula = "=VLOOKUP(AH2,'Country Code'!B:C,2,0)"
+        End If
+        .Range("AG:AG").Copy
+        .Range("AG:AG").PasteSpecial xlPasteValues
+        .Range("AG1").AutoFilter Field:=33, Criteria1:="#N/A", Operator:=xlFilterValues
+
+        Application.DisplayAlerts = False
+        On Error Resume Next
+        .Range("AG:AG").SpecialCells(xlCellTypeVisible).EntireColumn.ClearContents
+        On Error GoTo 0
+        Application.DisplayAlerts = True
+
+        .Range("AG1").AutoFilter Field:=33
+        .Range("AG1") = "Intermediary Country code"
+        .Range("AH:AH").Delete
+    End With
+
+    ' Save and close workbook
+    With wbFile
+        .Activate
+        .Save
+    End With
+End Sub

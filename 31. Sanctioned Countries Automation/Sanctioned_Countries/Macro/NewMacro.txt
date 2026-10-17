@@ -1,0 +1,156 @@
+Sub InsertImages()
+    Dim wbFile As Workbook
+    Dim wsNSanc As Worksheet
+    Dim wsSanc As Worksheet
+    Dim wsExport As Worksheet
+    Dim wsCountryCode As Worksheet
+    Dim FSO As Object
+    Dim fld As Object
+    Dim fil As Object
+    Dim Screenshot As Shape
+    Dim folderPath As String
+    Dim wb As Workbook
+    Dim topOffset As Single
+    Dim spacing As Single: spacing = 10 ' Space between images
+
+    ' Find open workbook that starts with "VM Team for checking" but is not ThisWorkbook
+    For Each wb In Application.Workbooks
+        If wb.Name Like "VM Team for checking*" And wb.Name <> ThisWorkbook.Name Then
+            On Error Resume Next
+            Set wsExport = wb.Worksheets("Export Worksheet")
+            Set wsCountryCode = wb.Worksheets("Country Code")
+            On Error GoTo 0
+
+            If Not wsExport Is Nothing And Not wsCountryCode Is Nothing Then
+                Set wbFile = wb
+                Exit For
+            End If
+        End If
+    Next wb
+
+    ' If no workbook found, show message and exit
+    If wbFile Is Nothing Then
+        MsgBox "No open workbook found starting with 'VM Team for checking'.", vbExclamation
+        Exit Sub
+    End If
+
+    ' Add fresh "Sanctioned" and "NonSanctioned" sheets
+    With wbFile
+        On Error Resume Next
+        Application.DisplayAlerts = False
+        .Worksheets("Sanctioned").Delete
+        .Worksheets("NonSanctioned").Delete
+        Application.DisplayAlerts = True
+        On Error GoTo 0
+
+        .Sheets.Add After:=.Sheets(.Sheets.Count)
+        ActiveSheet.Name = "Sanctioned"
+        .Sheets.Add After:=.Sheets(.Sheets.Count)
+        ActiveSheet.Name = "NonSanctioned"
+    End With
+
+    Set wsSanc = wbFile.Worksheets("Sanctioned")
+    Set wsNSanc = wbFile.Worksheets("NonSanctioned")
+
+    ' Set FSO for file access
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+
+    ' Insert screenshots into NonSanctioned sheet with vertical spacing
+    folderPath = "C:\Users\svc-fahelsrpa5\Desktop\RPA Projects\31. Sanctioned Countries Automation\Sanctioned_Countries\Tracker\Screenshot Non Sanctioned"
+    If FSO.FolderExists(folderPath) Then
+        Set fld = FSO.GetFolder(folderPath)
+        If fld.Files.Count > 0 Then
+            With wsNSanc
+                .Activate
+                topOffset = 0
+                For Each fil In fld.Files
+                    Set Screenshot = .Shapes.AddPicture(fil.Path, _
+                        linktofile:=msoFalse, savewithdocument:=msoCTrue, Left:=0, Top:=topOffset, Width:=-1, Height:=-1)
+                    topOffset = topOffset + Screenshot.Height + spacing
+                Next fil
+            End With
+        End If
+    End If
+
+    ' Insert screenshots into Sanctioned sheet with vertical spacing
+    folderPath = "C:\Users\svc-fahelsrpa5\Desktop\RPA Projects\31. Sanctioned Countries Automation\Sanctioned_Countries\Tracker\Screenshot Sanctioned"
+    If FSO.FolderExists(folderPath) Then
+        Set fld = FSO.GetFolder(folderPath)
+        If fld.Files.Count > 0 Then
+            With wsSanc
+                .Activate
+                topOffset = 0
+                For Each fil In fld.Files
+                    Set Screenshot = .Shapes.AddPicture(fil.Path, _
+                        linktofile:=msoFalse, savewithdocument:=msoCTrue, Left:=0, Top:=topOffset, Width:=-1, Height:=-1)
+                    topOffset = topOffset + Screenshot.Height + spacing
+                Next fil
+            End With
+        End If
+    End If
+
+    wsExport.Activate
+End Sub
+
+Sub Vlookup()
+    Dim wbFile As Workbook
+    Dim wsExport As Worksheet
+    Dim wsCountryCode As Worksheet
+    Dim Lrow As Long
+    Dim wb As Workbook
+
+    ' Find open workbook that starts with "VM Team for checking" but is not ThisWorkbook
+    For Each wb In Application.Workbooks
+        If wb.Name Like "VM Team for checking*" And wb.Name <> ThisWorkbook.Name Then
+            Set wbFile = wb
+            Exit For
+        End If
+    Next wb
+
+    ' If no workbook found, show message and exit
+    If wbFile Is Nothing Then
+        MsgBox "No open workbook found starting with 'VM Team for checking'.", vbExclamation
+        Exit Sub
+    End If
+
+    ' Set worksheets
+    On Error Resume Next
+    Set wsExport = wbFile.Worksheets("Export Worksheet")
+    Set wsCountryCode = wbFile.Worksheets("Country Code")
+    On Error GoTo 0
+
+    If wsExport Is Nothing Or wsCountryCode Is Nothing Then
+        MsgBox "Export Worksheet or Country Code sheet not found in workbook.", vbCritical
+        Exit Sub
+    End If
+
+    ' VLOOKUP and data cleaning
+    With wsExport
+        .Activate
+        Lrow = .Range("A" & .Rows.Count).End(xlUp).Row
+        .Range("AG:AG").Insert
+        .Range("AG1") = "Intermediary Country code"
+        .Range("AG2") = "=VLOOKUP(AH2,'Country Code'!B:C,2,0)"
+        .Range("AG2").AutoFill Destination:=.Range("AG2:AG" & Lrow), Type:=xlFillDefault
+        .Range("AG:AG").Copy
+        .Range("AG:AG").PasteSpecial xlPasteValues
+        .Range("AG1").AutoFilter Field:=33, Criteria1:="#N/A", Operator:=xlFilterValues
+
+        Application.DisplayAlerts = False
+        On Error Resume Next
+        .Range("AG:AG").SpecialCells(xlCellTypeVisible).EntireColumn.ClearContents
+        On Error GoTo 0
+        Application.DisplayAlerts = True
+
+        .Range("AG1").AutoFilter Field:=33
+        .Range("AG1") = "Intermediary Country code"
+        .Range("AH:AH").Delete
+    End With
+
+    ' Save and close workbook
+    With wbFile
+        .Activate
+        .Save
+    End With
+End Sub
+

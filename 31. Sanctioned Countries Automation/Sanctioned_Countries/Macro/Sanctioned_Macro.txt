@@ -1,0 +1,96 @@
+Sub InsertImages()
+    Dim wbFile As Workbook
+    Dim wsNSanc As Worksheet
+    Dim wsSanc As Worksheet
+    Dim wsExport As Worksheet
+    Dim FSO As Object
+    Dim fld As Object
+    Dim fil As Object
+    Dim Screenshot As Shape
+    Dim wb As Workbook
+    Dim folderPath As String
+    Dim topOffset As Single
+    Dim spacing As Single: spacing = 5
+
+    ' Initialize FileSystemObject
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+
+    ' Get the open workbook starting with "VM Team for checking"
+    For Each wb In Application.Workbooks
+        If wb.Name Like "VM Team for checking*" And wb.Name <> ThisWorkbook.Name Then
+            Set wbFile = wb
+            Exit For
+        End If
+    Next wb
+
+    If wbFile Is Nothing Then
+        MsgBox "No open workbook found starting with 'VM Team for checking'.", vbExclamation
+        Exit Sub
+    End If
+
+    ' Delete existing sheets and add fresh ones
+    With wbFile
+        .Activate
+        On Error Resume Next
+        Application.DisplayAlerts = False
+        .Worksheets("Sanctioned").Delete
+        .Worksheets("NonSanctioned").Delete
+        Application.DisplayAlerts = True
+        On Error GoTo 0
+
+        .Sheets.Add After:=.Sheets(.Sheets.Count)
+        ActiveSheet.Name = "Sanctioned"
+        .Sheets.Add After:=.Sheets(.Sheets.Count)
+        ActiveSheet.Name = "NonSanctioned"
+    End With
+
+    Set wsNSanc = wbFile.Worksheets("NonSanctioned")
+    Set wsSanc = wbFile.Worksheets("Sanctioned")
+
+    ' Insert images for NonSanctioned
+    folderPath = "C:\Users\Public\RPA Folders\31. Sanctioned Countries Automation\Sanctioned_Countries\Tracker\Screenshot Non Sanctioned"
+    If FSO.FolderExists(folderPath) Then
+        Set fld = FSO.GetFolder(folderPath)
+        If fld.Files.Count > 0 Then
+            With wsNSanc
+                .Activate
+                topOffset = 0
+                For Each fil In fld.Files
+                    Set Screenshot = .Shapes.AddPicture(fil.Path, _
+                        linktofile:=msoFalse, savewithdocument:=msoCTrue, Left:=0, Top:=topOffset, Width:=-1, Height:=-1)
+                    topOffset = topOffset + Screenshot.Height + spacing
+                Next fil
+            End With
+        End If
+    End If
+
+    ' Insert images for Sanctioned
+    folderPath = "C:\Users\Public\RPA Folders\31. Sanctioned Countries Automation\Sanctioned_Countries\Tracker\Screenshot Sanctioned"
+    If FSO.FolderExists(folderPath) Then
+        Set fld = FSO.GetFolder(folderPath)
+        If fld.Files.Count > 0 Then
+            With wsSanc
+                .Activate
+                topOffset = 0
+                For Each fil In fld.Files
+                    Set Screenshot = .Shapes.AddPicture(fil.Path, _
+                        linktofile:=msoFalse, savewithdocument:=msoCTrue, Left:=0, Top:=topOffset, Width:=-1, Height:=-1)
+                    topOffset = topOffset + Screenshot.Height + spacing
+                Next fil
+            End With
+        End If
+    End If
+
+    ' Go back to Export Worksheet if it exists
+    On Error Resume Next
+    Set wsExport = wbFile.Sheets("Export Worksheet")
+    If Not wsExport Is Nothing Then wsExport.Activate
+    On Error GoTo 0
+
+    ' Close all other open workbooks
+    For Each wb In Application.Workbooks
+        If wb.Name <> ThisWorkbook.Name And wb.Name <> wbFile.Name Then
+            wb.Close SaveChanges:=True
+        End If
+    Next wb
+End Sub

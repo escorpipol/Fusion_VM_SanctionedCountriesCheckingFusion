@@ -1,0 +1,262 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="NavigatetoBridger" sap:VirtualizedContainerService.HintSize="1398,3268" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:usa="clr-namespace:UiPathTeam.Subtitle.Activities;assembly=SubtitleActivity" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="78">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>UiPath.Mail.Outlook.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPathTeam.Subtitle.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Services.RuntimeAnalyze</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="128">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Primitives</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>SubtitleActivity</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Activities.Contracts</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Navigate to Bridger" sap:VirtualizedContainerService.HintSize="546,3203" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strBrdgerUserName" />
+      <Variable x:TypeArguments="ss:SecureString" Name="strBrdgerPass" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <usa:DisplaySubtitleActivity ContinueOnError="{x:Null}" BackgroundColor="Black" BackgroundOpacity="0.8" DisplayName="Display Subtitle" DurationMS="3000" FontSize="38" sap:VirtualizedContainerService.HintSize="484,80" sap2010:WorkflowViewState.IdRef="DisplaySubtitleActivity_3" Message="LogIn and Navigate to Bridger" TextColor="White" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="484,141" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;LogIn and Navigate to Bridger&quot;]" />
+    <ui:Click AlterIfDisabled="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" ContinueOnError="True" DelayBefore="10" DelayMS="10" DisplayName="Click 'Button'" sap:VirtualizedContainerService.HintSize="484,107" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+      <ui:Click.CursorPosition>
+        <ui:CursorPosition Position="Center">
+          <ui:CursorPosition.OffsetX>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetX>
+          <ui:CursorPosition.OffsetY>
+            <InArgument x:TypeArguments="x:Int32" />
+          </ui:CursorPosition.OffsetY>
+        </ui:CursorPosition>
+      </ui:Click.CursorPosition>
+      <ui:Click.Target>
+        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="532ae981-691a-406c-9310-2e3314978c9f" InformativeScreenshot="c28e457291f02c798aae47b405a8869f" Selector="&lt;wnd app='excel.exe' cls='#32770' title='Microsoft Excel' /&gt;&lt;wnd ctrlid='2' title='OK' /&gt;" TimeoutMS="5000">
+          <ui:Target.WaitForReady>
+            <InArgument x:TypeArguments="ui:WaitForReady" />
+          </ui:Target.WaitForReady>
+        </ui:Target>
+      </ui:Click.Target>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:Click>
+    <ui:GetRobotCredential AssetName="BridgerAcct" CacheStrategy="None" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="484,143" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[strBrdgerPass]" Username="[strBrdgerUserName]">
+      <ui:GetRobotCredential.TimeoutMS>
+        <InArgument x:TypeArguments="x:Int32" />
+      </ui:GetRobotCredential.TimeoutMS>
+    </ui:GetRobotCredential>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: New Tab" sap:VirtualizedContainerService.HintSize="484,2305" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="b36863a6-283c-4199-adef-436e832c87d1" Version="V2" WindowResize="Maximize">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="450,2088" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="RPAPass" />
+              <Variable x:TypeArguments="x:Boolean" Name="IsVerificationNotSuccess" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="388,90" sap2010:WorkflowViewState.IdRef="Delay_3" />
+            <uix:NClick ActivateBefore="True" ClickType="Single" ContinueOnError="True" DisplayName="Click Close Restore Pages" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_3" InteractionMode="HardwareEvents" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="287, 25, 24, 22" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;ctrl name='Restore pages?' role='alert' /&gt;&lt;ctrl name='Close' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Restore pages?' role='alert' /&gt;&lt;ctrl name='Close' role='push button' automationid='' check:text='Close' /&gt;" Guid="095e584c-a3a5-4258-8d6a-809469d83cc8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACRSURBVEhL7ZNBCoAgEEW7XLTpfCJUpFBtOmLExC/cmJjFMLSYxUPwDz5m1GrfiCRRITsqZOefwmVZyZgumQFkqEllMUVC5yaqm5asHW4Z9pChJs5SFI+07915MNbc3hOv7hCjg8D7mcbx6jo36hSvH02QfpGBfwuDTGSkoo8m103omvVbiH98TlTIjgrZERYSHRNL+bPMYNfIAAAAAElFTkSuQmCC" InformativeScreenshot="ef01bb67c24c97290920ad85dea1ceb4.png" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Restore pages?' /&gt;" SearchSteps="Selector" Version="V1" Visibility="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Client ID'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Text="REGlobalGB" Version="V3">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/?returnUrl=/XgApp/RealTime/Search/Index/44f4dac1-c722-45f0-8226-a3f29175b718" DesignTimeRectangle="756, 413, 228, 31" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;webctrl id='ClientId' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='ClientId' tag='INPUT' type='text' class='form-control small' aaname='Client ID' /&gt;" Guid="7800696d-c5f6-4cc0-9944-43569d788c66" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOgAAAAjCAYAAACehkYPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKdSURBVHhe7d3BbhJhGEbhuT137rwDF96KF2NcdKFLd70Aq9UYtTWtgAULCAwMfM5B/gm0XTS1mfkX5ySvaSrt7glTGGaK2XITk3Ido/k6rv5U0ZtWcTmu4sf1Ks5+r+L7aBXfdvs6XDrn/nPJE7YwhjXMYQ+DWMQkNouEc1D/Bw86rx/MD3+5WsbnX8s4HSzjY7+MD/VO9tdzzt17e3awhClsYQxrmMMeBrGYkBZbnLXci/Eqjs/m8fLdMF687sfzVz3nXEvDHPYwiEVMYrPgKRW1x+fz7YOO3o/icjCM4dA519Ywhz0MYhGT2Cw47uWpFb1HJ6MYj8dRlmWs12vnXEvDHPYwiEVMYrNAKse/yB2MxlFVVWw2mzCz9sIc9jCIRUxis+AVJP5I5Th4sViI06yjsIdBLGISmwUv8/JKEt/kqdbMuguDWMQkNgvei+HlXoGadV8CiklsFhzr8p6MQM26LwHFJDa3QHnj9CFAnzx9tvvKzB6jBBSTW6CcesTZDQI1674EFJPYFKhZRt0NtCdQsxxqgNYmBWqWWQI1yziBmmWcQM0yTqBmGSdQs4wTqFnG3Q3UExXMsqgB6plEZvl1C6gny5vlUwLanCzPPw/9uJlAzR63BLT5uJkf2DbLpwS0+cC2lzwxy6cEtLnkyf5FwwRq1m0JaHPRsP3Lbs7KavcwM+siDB5cdnP/wtVvTidedtOso7CHwYMLV9+89cPbT9OYr0Rq1maYwx4GD2794M2TnOt+mMPerZsneftB51rYnh0sYQpbGMMa5rCHwYPbD3oDX+faXfKELYxhDXPYw2DCub2B76I+9uWLaf2N68UO6uyf4n79A71JFT93u2T1L2IXzrl7L7nBUPKELYxhDXPYwyAWMblYbeIviLgFI8isU84AAAAASUVORK5CYII=" InformativeScreenshot="2440ef36e1f38f18db8d91f3dfaf8a16.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="676, 413, 50, 31" ElementType="Text" FullSelectorArgument="&lt;webctrl tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='LABEL' type='' class='col-form-label float-right' aaname='Client ID' check:innerText='Client ID' /&gt;" Guid="e074a52d-301c-443e-863a-8a3d2d78eaff" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADYAAAAjCAYAAADfXvn1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFGSURBVFhH7ZRhDoMgDEZ3SS4zjzLOsXiNxVO4S3RAi5QCZtn0R01fQoIo9XuA3uCimJg2TEwbJqYNE9OGiWmjK7Y8HDhXmn/RjcjLhzEPS+im5x6xdxYrzHcH03PFy/cME8u1tU4GIYaF3H0OPYKKbXKHiy3gef2KntgE8xsvEZwvc9RiLDRnfU5FdvDM7/wrFuiMV2Jf7cDOjqUFiKsXG991muPZEcewdEJorJX7UqyzOExMFBkxEhM72d5jtdN1DnjAjnWyHyYW+9XcFIJEhXQd8HQxscojumJYOB+p0ijE6WK7RzEgA2T4eFcM+8PdPlss1a/Ha7G88vzDpxdvxQdiMjz+SNrFSBwqhvPlSRNiSAocH6ZWvXQkFqj+ijzArlh5X7vjPbFcv7R23kDsCpiYNkxMGyamDRPTholpw8S0cVExgA/+TksxCP08SwAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Client ID'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_22" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Text="REGlobalGB" Version="V3">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/?returnUrl=/XgApp/RealTime/Search/Index/44f4dac1-c722-45f0-8226-a3f29175b718" DesignTimeRectangle="756, 413, 228, 31" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;webctrl id='ClientId' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='ClientId' tag='INPUT' type='text' class='form-control small' aaname='Client ID' /&gt;" Guid="7800696d-c5f6-4cc0-9944-43569d788c66" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOgAAAAjCAYAAACehkYPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKdSURBVHhe7d3BbhJhGEbhuT137rwDF96KF2NcdKFLd70Aq9UYtTWtgAULCAwMfM5B/gm0XTS1mfkX5ySvaSrt7glTGGaK2XITk3Ido/k6rv5U0ZtWcTmu4sf1Ks5+r+L7aBXfdvs6XDrn/nPJE7YwhjXMYQ+DWMQkNouEc1D/Bw86rx/MD3+5WsbnX8s4HSzjY7+MD/VO9tdzzt17e3awhClsYQxrmMMeBrGYkBZbnLXci/Eqjs/m8fLdMF687sfzVz3nXEvDHPYwiEVMYrPgKRW1x+fz7YOO3o/icjCM4dA519Ywhz0MYhGT2Cw47uWpFb1HJ6MYj8dRlmWs12vnXEvDHPYwiEVMYrNAKse/yB2MxlFVVWw2mzCz9sIc9jCIRUxis+AVJP5I5Th4sViI06yjsIdBLGISmwUv8/JKEt/kqdbMuguDWMQkNgvei+HlXoGadV8CiklsFhzr8p6MQM26LwHFJDa3QHnj9CFAnzx9tvvKzB6jBBSTW6CcesTZDQI1674EFJPYFKhZRt0NtCdQsxxqgNYmBWqWWQI1yziBmmWcQM0yTqBmGSdQs4wTqFnG3Q3UExXMsqgB6plEZvl1C6gny5vlUwLanCzPPw/9uJlAzR63BLT5uJkf2DbLpwS0+cC2lzwxy6cEtLnkyf5FwwRq1m0JaHPRsP3Lbs7KavcwM+siDB5cdnP/wtVvTidedtOso7CHwYMLV9+89cPbT9OYr0Rq1maYwx4GD2794M2TnOt+mMPerZsneftB51rYnh0sYQpbGMMa5rCHwYPbD3oDX+faXfKELYxhDXPYw2DCub2B76I+9uWLaf2N68UO6uyf4n79A71JFT93u2T1L2IXzrl7L7nBUPKELYxhDXPYwyAWMblYbeIviLgFI8isU84AAAAASUVORK5CYII=" InformativeScreenshot="2440ef36e1f38f18db8d91f3dfaf8a16.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="676, 413, 50, 31" ElementType="Text" FullSelectorArgument="&lt;webctrl tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='LABEL' type='' class='col-form-label float-right' aaname='Client ID' check:innerText='Client ID' /&gt;" Guid="99c13e18-1053-4d03-b00a-a2672bb2a419" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADYAAAAjCAYAAADfXvn1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFGSURBVFhH7ZRhDoMgDEZ3SS4zjzLOsXiNxVO4S3RAi5QCZtn0R01fQoIo9XuA3uCimJg2TEwbJqYNE9OGiWmjK7Y8HDhXmn/RjcjLhzEPS+im5x6xdxYrzHcH03PFy/cME8u1tU4GIYaF3H0OPYKKbXKHiy3gef2KntgE8xsvEZwvc9RiLDRnfU5FdvDM7/wrFuiMV2Jf7cDOjqUFiKsXG991muPZEcewdEJorJX7UqyzOExMFBkxEhM72d5jtdN1DnjAjnWyHyYW+9XcFIJEhXQd8HQxscojumJYOB+p0ijE6WK7RzEgA2T4eFcM+8PdPlss1a/Ha7G88vzDpxdvxQdiMjz+SNrFSBwqhvPlSRNiSAocH6ZWvXQkFqj+ijzArlh5X7vjPbFcv7R23kDsCpiYNkxMGyamDRPTholpw8S0cVExgA/+TksxCP08SwAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'User ID'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Text="[strBrdgerUserName]" Version="V3">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/?returnUrl=/XgApp/RealTime/Search/Index/44f4dac1-c722-45f0-8226-a3f29175b718" DesignTimeRectangle="756, 459, 228, 31" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;webctrl id='UserName' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='UserName' tag='INPUT' type='text' class='form-control small' aaname='User ID' /&gt;" Guid="2aecad1b-081b-4e67-9c38-ada52d2cab92" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOgAAAAjCAYAAACehkYPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD/SURBVHhe7d2xasMwGIXRvv/DlQ6hQ0uHDJlCoUtLF6NwITEOJKt1h3PgXyytH9YkvQyglkCh2F2gv3//4+t4Gm/vn+P18GGM2WnSXNpLg1troFnIpvP3z1iW5foV2EOaS3tpcBvpGmjqzQZgnjSYFm/WQFOuPyfMlQbT4s0aaM7BwHzbFgUKZQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxR4G6l5cmO/pvbhulof5nt4s720WmCfNpb00+PBtlshC6s2mnIONMftMmkt72zjjLlCgi0Ch1hgXpRFoRiHv25UAAAAASUVORK5CYII=" InformativeScreenshot="41d32a8f9fc1a2e0f4eb07a031691207.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="682, 459, 44, 31" ElementType="Text" FullSelectorArgument="&lt;webctrl aaname='User ID' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='User ID' tag='LABEL' type='' class='col-form-label float-right' check:innerText='User ID' /&gt;" Guid="fc4db742-83e0-42dc-92b6-5072b11dd92c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAjCAYAAADSQImyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEWSURBVFhH7ZQLDoMgDEB3SS4jR5FzGK5hPIVeokOKEwo4NSSdS19CMj62fdDsBQ9HBLgRAW5EgBsR4EYEuPkngQmMUmDGMP1QW2/JDLZToIcZp4sF7XIqOvoJ9yN+WECDXXCKYB1U4kECjsL6dQHyvOn5cEvZHhZoelNphZMChRovCoRCtjM+kXEnVo6KwD3VWferxFkBcs5xS6BYSCKDTP2WLE+c0kSgloSKBQm35scmM4b2oMO3SyuB/JK/C1SDrWBA/03hBXYaCfhLStcjARdm0NmBtQ32lim/Rtxee5GRXBMBjHfwN4qgRNQCtN998Gg/CRiSZHt3BKI4YZS+zwSehghwIwLciAA3IsCNCHAjArwAvAE8QDfArbVCvQAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Next'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/?returnUrl=/XgApp/RealTime/Search/Index/44f4dac1-c722-45f0-8226-a3f29175b718" DesignTimeRectangle="931, 506, 53, 31" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;webctrl id='Next' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='Next' tag='INPUT' type='button' class='btn btn-primary float-right' aaname='Next' check:text='Next' /&gt;" Guid="a6f39ccf-bb05-4e52-8fca-ea2abf6539cf" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADkAAAAjCAYAAAAuVaJ4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF4SURBVGhD7ZlBbgIxDEV7EBZdsOBA3fU0rDgL3AMO0C6HK8xiKiEhGOHazjhxAq0oRNV4ki99iXiSKG9sZzG8QAEqD/L88Qlfb+/Qvi6gnc3tGc9N5ycOLQ9JD8zCpUYODeohOYO3Fhg18Yg85GSyKEYeUYC8NdG4RRXSukUV0rpFFfIeHxtavYdjEj9sO4BmE8X+26JMkACX7SqK54DkvZ/YQ5QHsuvgAh2cliE+PUg8iIPdwWGIp5A8Fvl5KzhROF2H5X/W8x8EFWWDbGcb6PFnv3bxCHK9xyehb+MMOVAu9+UuqojRZZLHCkZD0pyoZxlGXVY8dtLzxgkp5YfjADnErhT3MO+jyvZ6779blBkSPZRc3/ySydRcAXh54RIDmXT2l4zEk56Uy8WNVS+b6Elvd3Ad9+AsAflp3vAC+OWgkjK+16KnIcdsUYW0blGFtG5RhbRuUYAs4btrEV/Qi/gvhEQPOKNWYfHcdH4NSIogp6oCIAG+AXcRSv8fQFAPAAAAAElFTkSuQmCC" InformativeScreenshot="2367e204eed712617827baf9bdcc4d77.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Password'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" SecureText="[strBrdgerPass]" Version="V3">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/" DesignTimeRectangle="756, 562, 228, 31" DesignTimeScaleFactor="1" ElementType="InputBoxPassword" FullSelectorArgument="&lt;webctrl id='Password' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='Password' tag='INPUT' type='password' class='validatePassword form-control small' aaname='Password' /&gt;" Guid="2d306c96-785d-4d93-9d6c-4f6c3c4868a2" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAOgAAAAjCAYAAACehkYPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD/SURBVHhe7d2xasMwGIXRvv/DlQ6hQ0uHDJlCoUtLF6NwITEOJKt1h3PgXyytH9YkvQyglkCh2F2gv3//4+t4Gm/vn+P18GGM2WnSXNpLg1troFnIpvP3z1iW5foV2EOaS3tpcBvpGmjqzQZgnjSYFm/WQFOuPyfMlQbT4s0aaM7BwHzbFgUKZQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxQQKxR4G6l5cmO/pvbhulof5nt4s720WmCfNpb00+PBtlshC6s2mnIONMftMmkt72zjjLlCgi0Ch1hgXpRFoRiHv25UAAAAASUVORK5CYII=" InformativeScreenshot="723b671852731e05fec371c0b1c5fc9a.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                      <uix:Target DesignTimeRectangle="669, 562, 57, 31" ElementType="Text" FullSelectorArgument="&lt;webctrl aaname='Password' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Password' tag='LABEL' type='' class='col-form-label float-right' check:innerText='Password' /&gt;" Guid="3f5b6b0b-977d-4ab5-b48f-2ed2047c2705" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAD0AAAAjCAYAAAAnvgICAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVGhD7ZSNbYQwDIW7JMuQUcgcJ9ZATMEtkfqX2IGj6l2lCjlPQm3Adt5n5/JVAqpDR1GHjqIOHUUdOoo6dBQZ6LXkYShD+4xz2STintrKPA4lPSrFATovsiRxwjCtsr6jfg0NWjJMPMPXu+ovoGldj78ttk71vftZPOeSTA7vwWbqfu3+uE5lfsrK1jYnD9+nKXN93dPuN+aSPzve3ohrCP5vQMkMbdTAkSHO2R6p1ob8NPq11qO4vTb7VAhuhj2JzWRlSJfQezf1sRNrRGYsNMT7pqGkcWd1GrC8gAdZt02zpm0TCNreOdRUM5iT/J+Pt5MASENoMhdHv9byeX5qaBC/n/3VGO/rEpo82MlzzPvQbcGTDVTuFDjxPmoCDdkJ08QfMK29Mdyw/5s0QWpBLqZg1ggJY2nd1uU8XXNegstIjEMenqBXkGdNc9DqS9/JpfY+tBaEOIJffFfJAH2T79pte5vic5iMMXWYFMvVNvlHaBSzcDzc3hDzAjqOOnQUdego6tBR1KGjqENHUYeOooDQpXwDKCj4t9Cb/MoAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="388,90" sap2010:WorkflowViewState.IdRef="Delay_1" />
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Next'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="b36863a6-283c-4199-adef-436e832c87d1" Version="V3">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="https://bridger.lexisnexis.eu/XgAuth/" DesignTimeRectangle="931, 609, 53, 31" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;webctrl id='Next' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='Next' tag='INPUT' type='button' class='btn btn-primary float-right' aaname='Next' check:text='Next' /&gt;" Guid="365e128a-add1-4d7b-ba4f-cbf23dc2dce8" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADkAAAAjCAYAAAAuVaJ4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF4SURBVGhD7Zk9bsMwDIV7kAwdOvRA3XqaTDlLco/kAO3oXMGDCwQIEiMsSZkSpfygrYXCtPSAB0S0JOgzSQ3OExSg8iDPH5/w9fYO7fMrtIsXe8Zz0/mJQ8tD0gOzcKmRQ4N6SM7grQVGTTwiDzmbLIqRRxQgb000blGFtG5RhbRu0WjIY0Or93BM4odtB9Bsoth/W5QJEuCyXUXxHJC894g9RHkguw4u0MFpGeLzg8SDONgdHIZ4CsljkZ+3ghOF03VY/mc9/4+gomyQ7WIDPf7s1y4eQa73+CT0bZwhB8rlvtxFFTG5TPJYwWhImhP1LMOoy4rHTnreNCGl/HAcIIfYleIe5n1U2V7v/XuLMkOih5LrmweZTM0VgJcXLjGQSWd/yUg86Um5XNxY9bKJnvR2B9dxD84SkHvzhhfALweVlPFPLRoNOWWLKqR1iyqkdYsqpHWLAmQJnySL+LhcxN8EJHrAGbUKi+em82tAUgQ5V1XIeQjgG5w6qw8xkc29AAAAAElFTkSuQmCC" InformativeScreenshot="d0253773fd3db80b085c19aa83f630b3.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='LexisNexis® Risk Solutions Bridger Insight® XG Sign In' /&gt;" SearchSteps="FuzzySelector, Image" Version="V1" Visibility="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <Delay Duration="00:00:10" sap:VirtualizedContainerService.HintSize="388,90" sap2010:WorkflowViewState.IdRef="Delay_4" />
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1056" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="0d2e89e1fc363ff8a0b837014fa606e1.png" Selector="&lt;html app='chrome.exe' url='https://bridger.lexisnexis.eu/' /&gt;" Url="https://bridger.lexisnexis.eu/" />
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <ui:WriteCell Cell="B5" DisplayName="Private: Write Cell Workbook" sap:VirtualizedContainerService.HintSize="484,116" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Sheet1" Text="Done" WorkbookPath="31. Sanctioned Countries Automation\Sanctioned_Countries\Running Status Sanction Countries.xlsx" />
+  </Sequence>
+</Activity>
